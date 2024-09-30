@@ -17,16 +17,32 @@
         textarea {
             width: 80%;
             height: 150px;
+            font-size: 16px;
+            padding: 10px;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
             margin-top: 10px;
+            cursor: pointer;
         }
         .message {
             display: none;
             margin-top: 20px;
             font-size: 18px;
+        }
+        .animate-text {
+            animation: flyUp 2s ease-out forwards;
+        }
+        @keyframes flyUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-300px);
+            }
         }
     </style>
 </head>
@@ -43,9 +59,17 @@
 
     <script>
         function sendThought() {
-            // 想いを飛ばす処理
-            document.getElementById('form-container').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
+            const textarea = document.getElementById('thoughts');
+            const message = document.getElementById('successMessage');
+            
+            // 想いのテキストをアニメーションさせて飛ばす
+            textarea.classList.add('animate-text');
+            
+            // アニメーション後にフォームを隠してメッセージを表示
+            setTimeout(() => {
+                document.getElementById('form-container').style.display = 'none';
+                message.style.display = 'block';
+            }, 2000);  // 2秒後にフォームを隠す
         }
     </script>
 
