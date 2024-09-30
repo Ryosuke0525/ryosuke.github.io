@@ -7,7 +7,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/01@2x.jpg'); /* 初期画面の背景画像を設定 */
             background-size: cover;
+            background-position: center;
             color: #fff;
             text-align: center;
             margin: 0;
@@ -34,9 +36,9 @@
             z-index: 20; /* 背景画像よりも前面に表示 */
         }
         textarea {
-            width: 90%; /* 横長に調整 */
-            max-width: 1200px; /* 横幅の最大サイズを指定 */
-            height: 150px; /* 高さを少し減らしました */
+            width: 95%; /* 横長にさらに調整 */
+            max-width: 1400px; /* 横幅の最大サイズを指定 */
+            height: 200px; /* 高さも少し大きくしました */
             font-size: 18px;
             padding: 15px;
             background-color: rgba(0, 0, 0, 0.5);
@@ -198,8 +200,8 @@
                     }, 4000); // 4秒後にテキストを浮き上がらせるアニメーション開始
 
                     setTimeout(() => {
-                        retryBtn.style.display = 'block'; // テキストが消えた2秒後にやり直しボタンを表示
-                    }, 6000); // 文字が消えた2秒後にリトライボタンを表示
+                        retryBtn.style.display = 'block'; // テキストが消えた5秒後にやり直しボタンを表示（時間を3秒延長）
+                    }, 9000); // 9秒後にリトライボタンを表示
                 }
             }, 2000); // 2秒ごとに画像を切り替える
         }
