@@ -63,12 +63,12 @@
         }
         .image-sequence {
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover; /* 画像が歪まないようにする */
             display: none;
-            width: 300px; /* 画像のサイズは適宜調整 */
-            height: auto;
         }
         .fade-out {
             animation: fadeOut 3s ease-out forwards;
