@@ -7,9 +7,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000;
+            background: url('https://example.com/space-background.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #fff;
             text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
         }
         #form-container {
             margin-top: 50px;
@@ -19,12 +24,27 @@
             height: 150px;
             font-size: 16px;
             padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: 1px solid #fff;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
             margin-top: 10px;
             cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: 1px solid #fff;
+            color: #fff;
+        }
+        #fly-text {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            white-space: pre-wrap;
+            display: none;
         }
         .message {
             display: none;
@@ -32,7 +52,7 @@
             font-size: 18px;
         }
         .animate-text {
-            animation: flyUp 2s ease-out forwards;
+            animation: flyUp 3s ease-out forwards;
         }
         @keyframes flyUp {
             0% {
@@ -41,7 +61,7 @@
             }
             100% {
                 opacity: 0;
-                transform: translateY(-300px);
+                transform: translateY(-400px);
             }
         }
     </style>
@@ -55,21 +75,28 @@
         <button onclick="sendThought()">想いを飛ばす</button>
     </div>
 
+    <div id="fly-text"></div>
+
     <div class="message" id="successMessage">あなたの想いは宇宙へ飛び立ちました！</div>
 
     <script>
         function sendThought() {
             const textarea = document.getElementById('thoughts');
+            const flyText = document.getElementById('fly-text');
             const message = document.getElementById('successMessage');
             
-            // 想いのテキストをアニメーションさせて飛ばす
-            textarea.classList.add('animate-text');
-            
-            // アニメーション後にフォームを隠してメッセージを表示
+            // テキストエリアの内容を取得して、flyTextに表示
+            const userThoughts = textarea.value;
+            flyText.textContent = userThoughts;
+            flyText.style.display = 'block';
+            flyText.classList.add('animate-text');
+
+            // アニメーション後にテキストを飛ばし、フォームを非表示にする
             setTimeout(() => {
                 document.getElementById('form-container').style.display = 'none';
+                flyText.style.display = 'none';
                 message.style.display = 'block';
-            }, 2000);  // 2秒後にフォームを隠す
+            }, 3000);  // アニメーションが終わる3秒後に処理を実行
         }
     </script>
 
