@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url(https://i.ytimg.com/vi/fAcIsobtvz0/maxresdefault.jpg) no-repeat center center fixed;
+            background: url('https://example.com/space-background.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
             text-align: center;
@@ -83,9 +83,8 @@
         function sendThought() {
             const textarea = document.getElementById('thoughts');
             const flyText = document.getElementById('fly-text');
+            const formContainer = document.getElementById('form-container');
             const message = document.getElementById('successMessage');
-
-            formContainer.style.display = 'none';
             
             // テキストエリアの内容を取得して、flyTextに表示
             const userThoughts = textarea.value;
@@ -93,7 +92,14 @@
             flyText.style.display = 'block';
             flyText.classList.add('animate-text');
 
+            // ボタンを押した瞬間にフォームを非表示にする
+            formContainer.style.display = 'none';
 
+            // アニメーション後にメッセージを表示する
+            setTimeout(() => {
+                flyText.style.display = 'none';
+                message.style.display = 'block';
+            }, 3000);  // アニメーションが終わる3秒後に処理を実行
         }
     </script>
 
