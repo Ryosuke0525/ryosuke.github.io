@@ -38,7 +38,7 @@
         textarea {
             width: 95%; /* 横長にさらに調整 */
             max-width: 1400px; /* 横幅の最大サイズを指定 */
-            height: 200px; /* 高さも少し大きくしました */
+            height: 600px; /* 高さを現在の3倍に調整 */
             font-size: 18px;
             padding: 15px;
             background-color: rgba(0, 0, 0, 0.5);
@@ -89,21 +89,6 @@
             opacity: 0;
             transition: opacity 1s ease-in-out; /* フェード効果の追加 */
         }
-        #image1 {
-            display: block;
-            opacity: 1; /* 最初の画像を表示 */
-        }
-        .fade-out {
-            animation: fadeOut 3s ease-out forwards;
-        }
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
         #retry-btn {
             display: none;
             padding: 12px 24px;
@@ -146,7 +131,7 @@
     <div class="message" id="successMessage">あなたの想いは宇宙へ飛び立ちました！</div>
 
     <!-- 画像を5枚用意 -->
-    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001642.png" class="image-sequence" id="image1" style="display: block;" alt="Sequence Image 1">
+    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001642.png" class="image-sequence" id="image1" alt="Sequence Image 1">
     <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001700.png" class="image-sequence" id="image2" alt="Sequence Image 2">
     <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001717.png" class="image-sequence" id="image3" alt="Sequence Image 3">
     <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001740.png" class="image-sequence" id="image4" alt="Sequence Image 4">
@@ -159,9 +144,12 @@
             const textarea = document.getElementById('thoughts');
             const flyText = document.getElementById('fly-text');
             const formContainer = document.getElementById('form-container');
-            const message = document.getElementById('successMessage');
             const retryBtn = document.getElementById('retry-btn');
             const mainTitle = document.getElementById('main-title');
+            const images = ['image1', 'image2', 'image3', 'image4', 'image5'];
+
+            // 初期背景を消し、1枚目から切り替えを開始する
+            document.body.style.backgroundImage = 'none';
 
             // テキストエリアの内容を取得して中央に表示
             flyText.textContent = textarea.value;
@@ -170,8 +158,6 @@
             formContainer.style.display = 'none';
             mainTitle.style.display = 'none';
 
-            // 画像のリスト
-            const images = ['image1', 'image2', 'image3', 'image4', 'image5'];
             let currentImageIndex = 0;
 
             // 2秒ごとに画像を切り替え
@@ -200,7 +186,7 @@
                     }, 4000); // 4秒後にテキストを浮き上がらせるアニメーション開始
 
                     setTimeout(() => {
-                        retryBtn.style.display = 'block'; // テキストが消えた5秒後にやり直しボタンを表示（時間を3秒延長）
+                        retryBtn.style.display = 'block'; // テキストが消えた5秒後にやり直しボタンを表示
                     }, 9000); // 9秒後にリトライボタンを表示
                 }
             }, 2000); // 2秒ごとに画像を切り替える
@@ -213,10 +199,12 @@
             const mainTitle = document.getElementById('main-title');
             const images = ['image1', 'image2', 'image3', 'image4', 'image5'];
 
-            // 画像をすべて非表示にし、フォームとタイトルを再表示
+            // 画像をすべて非表示にし、初期画面を再表示
             images.forEach(imageId => {
                 document.getElementById(imageId).style.display = 'none';
             });
+
+            document.body.style.backgroundImage = 'url(https://ryosuke0525.github.io/ryosuke.github.io/01@2x.jpg)'; // 初期背景を戻す
 
             flyText.textContent = '';
             flyText.style.display = 'block';
