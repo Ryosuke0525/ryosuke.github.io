@@ -22,6 +22,11 @@
         h1 {
             position: relative;
             z-index: 20; /* 背景画像よりも前面に表示 */
+            background-color: rgba(0, 0, 0, 0.5); /* 背景に黒を少し入れて、見やすくする */
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* シャドウで文字が背景に溶け込まないように */
         }
         #form-container {
             margin-top: 20px;
@@ -105,11 +110,21 @@
         #retry-btn:hover {
             background-color: rgba(255, 255, 255, 0.5);
         }
+        @keyframes floatUp {
+            0% {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -200%);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h1>あなたの想いを宇宙へ飛ばそう！</h1>
+    <h1 id="main-title">あなたの想いを宇宙へ飛ばそう！</h1>
 
     <div id="form-container">
         <textarea id="thoughts" placeholder="ここにあなたの想いを書いてください"></textarea><br>
@@ -136,6 +151,7 @@
             const formContainer = document.getElementById('form-container');
             const message = document.getElementById('successMessage');
             const retryBtn = document.getElementById('retry-btn');
+            const mainTitle = document.getElementById('main-title');
 
             // テキストエリアが空の場合のエラーハンドリング
             const userThoughts = textarea.value.trim();
@@ -147,8 +163,9 @@
             // テキストエリアの内容を取得して中央に表示
             flyText.textContent = userThoughts;
 
-            // ボタンを押した瞬間にフォームを非表示にする
+            // ボタンを押した瞬間にフォームとタイトルを非表示にする
             formContainer.style.display = 'none';
+            mainTitle.style.display = 'none';
 
             // 画像のリスト
             const images = ['image1', 'image2', 'image3', 'image4', 'image5'];
@@ -167,10 +184,13 @@
                     currentImageIndex++;
                 }
 
-                // 5枚目の画像が表示されたら、3秒間フェードアウトせず文字を消す
+                // 5枚目の画像が表示されたら4秒後にテキストを浮き上がらせて消す
                 if (currentImageIndex === images.length) {
                     clearInterval(imageInterval);
-                    flyText.style.display = 'none';  // 文字を非表示にする
+                    setTimeout(() => {
+                        flyText.style.animation = 'floatUp 3s ease-out forwards'; // 文字が浮き上がって消える
+                    }, 4000); // 4秒後にテキストを浮き上がらせるアニメーション開始
+
                     retryBtn.style.display = 'block'; // やり直しボタンを表示
                 }
             }, 1000); // 1秒ごとに画像を切り替える
@@ -180,16 +200,19 @@
             const formContainer = document.getElementById('form-container');
             const flyText = document.getElementById('fly-text');
             const retryBtn = document.getElementById('retry-btn');
+            const mainTitle = document.getElementById('main-title');
             const images = ['image1', 'image2', 'image3', 'image4', 'image5'];
 
-            // 画像をすべて非表示にし、フォームを再表示
+            // 画像をすべて非表示にし、フォームとタイトルを再表示
             images.forEach(imageId => {
                 document.getElementById(imageId).style.display = 'none';
             });
 
             flyText.textContent = '';
             flyText.style.display = 'block';
+            flyText.style.animation = ''; // アニメーションをリセット
             formContainer.style.display = 'block';
+            mainTitle.style.display = 'block';
             retryBtn.style.display = 'none'; // やり直しボタンを非表示にする
         }
     </script>
