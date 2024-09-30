@@ -40,7 +40,7 @@
             align-items: center; /* フォームを中央に配置 */
         }
         textarea {
-            width: 300%; /* 横幅を3倍に調整 */
+            width: 180%; /* 横幅を3倍に調整 */
             max-width: 2200px; /* 横幅の最大サイズを指定 */
             height: 200px; /* 高さを200pxに戻しました */
             font-size: 18px;
@@ -214,7 +214,10 @@
             flyText.textContent = '';
             flyText.style.display = 'block';
             flyText.style.animation = ''; // アニメーションをリセット
-            formContainer.style.display = 'block';
+            formContainer.style.display = 'flex'; // フォームを中央に再配置
+            formContainer.style.flexDirection = 'column';
+            formContainer.style.justifyContent = 'center';
+            formContainer.style.alignItems = 'center';
             mainTitle.style.display = 'block';
             retryBtn.style.display = 'none'; // やり直しボタンを非表示にする
 
