@@ -14,20 +14,25 @@
             margin: 0;
             padding: 0;
             height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
         }
         #form-container {
-            margin-top: 50px;
+            margin-top: 20px;
         }
         textarea {
-            width: 80vw;
+            width: 80%;
+            max-width: 600px;
             height: 150px;
             font-size: 16px;
             padding: 10px;
             background-color: rgba(0, 0, 0, 0.5);
             color: #fff;
             border: 1px solid #fff;
-            box-sizing: border-box;
+            resize: none;
         }
         button {
             padding: 10px 20px;
@@ -62,7 +67,7 @@
             top: 50%;
             transform: translate(-50%, -50%);
             display: none;
-            width: 300px;
+            width: 300px; /* 画像のサイズは適宜調整 */
             height: auto;
         }
         .fade-out {
@@ -74,15 +79,6 @@
             }
             100% {
                 opacity: 0;
-            }
-        }
-        @media (max-width: 768px) {
-            textarea {
-                width: 90vw;
-            }
-            button {
-                font-size: 14px;
-                padding: 8px 16px;
             }
         }
     </style>
@@ -101,11 +97,11 @@
     <div class="message" id="successMessage">あなたの想いは宇宙へ飛び立ちました！</div>
 
     <!-- 画像を5枚用意 -->
-    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001642.png" class="image-sequence" id="image1">
-    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001700.png" class="image-sequence" id="image2">
-    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001717.png" class="image-sequence" id="image3">
-    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001740.png" class="image-sequence" id="image4">
-    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-09-21%20095840.png" class="image-sequence" id="image5">
+    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001642.png" class="image-sequence" id="image1" alt="Sequence Image 1">
+    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001700.png" class="image-sequence" id="image2" alt="Sequence Image 2">
+    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001717.png" class="image-sequence" id="image3" alt="Sequence Image 3">
+    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001740.png" class="image-sequence" id="image4" alt="Sequence Image 4">
+    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-09-21%20095840.png" class="image-sequence" id="image5" alt="Sequence Image 5">
 
     <script>
         function sendThought() {
@@ -113,16 +109,15 @@
             const flyText = document.getElementById('fly-text');
             const formContainer = document.getElementById('form-container');
             const message = document.getElementById('successMessage');
-            
-            // テキストエリアの内容を取得して中央に表示
+
+            // テキストエリアが空の場合のエラーハンドリング
             const userThoughts = textarea.value.trim();
-            
-            // 入力が空の場合の警告
             if (!userThoughts) {
                 alert("想いを書いてから送信してください！");
                 return;
             }
 
+            // テキストエリアの内容を取得して中央に表示
             flyText.textContent = userThoughts;
 
             // ボタンを押した瞬間にフォームを非表示にする
@@ -155,7 +150,6 @@
                     setTimeout(() => {
                         lastImage.style.display = 'none';
                         message.style.display = 'block';
-                        textarea.value = ""; // テキストエリアをクリア
                     }, 3000);
                 }
             }, 1000); // 1秒ごとに画像を切り替える
