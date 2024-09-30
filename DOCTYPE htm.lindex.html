@@ -44,6 +44,9 @@
             border: 1px solid #fff;
             resize: none;
         }
+        textarea::placeholder {
+            color: #fff; /* プレースホルダーの文字色を白に変更 */
+        }
         button {
             padding: 12px 24px;
             font-size: 18px;
@@ -109,6 +112,8 @@
             color: #fff;
             transition: background-color 0.3s ease;
             margin-top: 20px;
+            position: relative;
+            z-index: 30; /* リトライボタンを最前面に表示 */
         }
         #retry-btn:hover {
             background-color: rgba(255, 255, 255, 0.5);
