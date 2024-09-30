@@ -19,13 +19,19 @@
             align-items: center;
             overflow: hidden;
         }
+        h1 {
+            position: relative;
+            z-index: 20; /* 背景画像よりも前面に表示 */
+        }
         #form-container {
             margin-top: 20px;
+            position: relative;
+            z-index: 20; /* 背景画像よりも前面に表示 */
         }
         textarea {
             width: 90%;
             max-width: 800px;
-            height: 250px; /* サイズを大きくしました */
+            height: 250px;
             font-size: 18px;
             padding: 15px;
             background-color: rgba(0, 0, 0, 0.5);
@@ -54,7 +60,7 @@
             font-size: 24px;
             white-space: pre-wrap;
             text-align: center;
-            z-index: 10; /* 文字が常に前面に表示されるようにしました */
+            z-index: 20; /* 背景画像よりも前面に表示 */
         }
         .message {
             display: none;
@@ -67,8 +73,9 @@
             top: 0;
             width: 100vw;
             height: 100vh;
-            object-fit: cover; /* 画像が歪まないようにする */
+            object-fit: cover;
             display: none;
+            z-index: 10; /* 背景画像はテキストよりも後ろに表示 */
         }
         #image1 {
             display: block; /* 最初の画像を表示 */
