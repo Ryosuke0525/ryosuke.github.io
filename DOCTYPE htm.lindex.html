@@ -23,13 +23,13 @@
         }
         h1 {
             position: relative;
-            z-index: 20; /* 背景画像よりも前面に表示 */
-            background-color: rgba(0, 0, 0, 0.5); /* 背景に黒を少し入れて、見やすくする */
+            z-index: 20;
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 10px;
             border-radius: 10px;
             color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* シャドウで文字が背景に溶け込まないように */
-            font-size: 6vw; /* 画面幅に応じたフォントサイズに変更 */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 5vw; /* 控えめなフォントサイズに変更 */
         }
         #form-container {
             margin-top: 20px;
@@ -41,22 +41,22 @@
             align-items: center; /* フォームを中央に配置 */
         }
         textarea {
-            width: 90%; /* 横幅を動的に調整 */
-            max-width: 800px; /* 最大横幅を制限 */
-            height: 150px; /* スマートフォン対応の高さに調整 */
-            font-size: 16px; /* スマートフォン対応のフォントサイズ */
-            padding: 10px;
+            width: 95%; /* テキストボックスを大きく */
+            max-width: 1200px; /* 横幅の最大サイズ */
+            height: 300px; /* 高さを大きく調整 */
+            font-size: 18px; /* テキストサイズを大きめに */
+            padding: 15px;
             background-color: rgba(0, 0, 0, 0.5);
-            color: #fff; /* テキストの色を白に変更 */
+            color: #fff;
             border: 1px solid #fff;
             resize: none;
         }
         textarea::placeholder {
-            color: #fff; /* プレースホルダーの文字色を白に変更 */
+            color: #fff;
         }
         button {
             padding: 12px 24px;
-            font-size: 16px; /* ボタンのフォントサイズも調整 */
+            font-size: 16px;
             margin-top: 10px;
             cursor: pointer;
             background-color: rgba(255, 255, 255, 0.3);
@@ -72,10 +72,10 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            font-size: 5vw; /* 画面幅に応じたフォントサイズに変更 */
+            font-size: 4vw;
             white-space: pre-wrap;
             text-align: center;
-            z-index: 20; /* 背景画像よりも前面に表示 */
+            z-index: 20;
         }
         .message {
             display: none;
@@ -90,14 +90,14 @@
             height: 100vh;
             object-fit: cover;
             display: none;
-            z-index: 10; /* 背景画像はテキストよりも後ろに表示 */
+            z-index: 10;
             opacity: 0;
-            transition: opacity 1s ease-in-out; /* フェード効果の追加 */
+            transition: opacity 1s ease-in-out;
         }
         #retry-btn {
             display: none;
             padding: 12px 24px;
-            font-size: 16px; /* スマートフォン対応のフォントサイズに調整 */
+            font-size: 16px;
             cursor: pointer;
             background-color: rgba(255, 255, 255, 0.3);
             border: 1px solid #fff;
@@ -105,7 +105,7 @@
             transition: background-color 0.3s ease;
             margin-top: 20px;
             position: relative;
-            z-index: 30; /* リトライボタンを最前面に表示 */
+            z-index: 30;
         }
         #retry-btn:hover {
             background-color: rgba(255, 255, 255, 0.5);
@@ -124,17 +124,17 @@
         /* スマートフォン対応用のメディアクエリ */
         @media screen and (max-width: 600px) {
             h1 {
-                font-size: 8vw; /* より小さい画面でのフォントサイズを調整 */
+                font-size: 7vw; /* スマートフォン用のタイトルサイズを調整 */
             }
             textarea {
-                height: 120px; /* スマートフォン向けに高さをさらに調整 */
-                font-size: 14px; /* スマートフォン向けにフォントサイズを調整 */
+                height: 200px; /* スマートフォン向けの高さ */
+                font-size: 16px; /* スマートフォン向けにフォントサイズを調整 */
             }
             button {
-                font-size: 14px; /* スマートフォン用のボタンのフォントサイズを調整 */
+                font-size: 14px;
             }
             #fly-text {
-                font-size: 4vw; /* スマートフォン用の飛び出す文字サイズ */
+                font-size: 5vw;
             }
         }
     </style>
