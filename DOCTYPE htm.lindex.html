@@ -34,9 +34,9 @@
             z-index: 20; /* 背景画像よりも前面に表示 */
         }
         textarea {
-            width: 90%;
-            max-width: 800px;
-            height: 250px;
+            width: 90%; /* 横長に調整 */
+            max-width: 1200px; /* 横幅の最大サイズを指定 */
+            height: 150px; /* 高さを少し減らしました */
             font-size: 18px;
             padding: 15px;
             background-color: rgba(0, 0, 0, 0.5);
@@ -156,15 +156,8 @@
             const retryBtn = document.getElementById('retry-btn');
             const mainTitle = document.getElementById('main-title');
 
-            // テキストエリアが空の場合のエラーハンドリング
-            const userThoughts = textarea.value.trim();
-            if (!userThoughts) {
-                alert("想いを書いてから送信してください！");
-                return;
-            }
-
             // テキストエリアの内容を取得して中央に表示
-            flyText.textContent = userThoughts;
+            flyText.textContent = textarea.value;
 
             // ボタンを押した瞬間にフォームとタイトルを非表示にする
             formContainer.style.display = 'none';
@@ -174,16 +167,21 @@
             const images = ['image1', 'image2', 'image3', 'image4', 'image5'];
             let currentImageIndex = 0;
 
-            // 2秒ごとに画像を切り替え、フェード効果を追加
+            // 2秒ごとに画像を切り替え
             const imageInterval = setInterval(() => {
+                // すべての画像を一度非表示にする
                 images.forEach(imageId => {
-                    document.getElementById(imageId).style.opacity = '0'; // フェードアウト
+                    document.getElementById(imageId).style.display = 'none';
+                    document.getElementById(imageId).style.opacity = '0';
                 });
-
+                
+                // 次の画像をフェードインで表示
                 if (currentImageIndex < images.length) {
-                    const currentImage = document.getElementById(images[currentImageIndex]);
-                    currentImage.style.display = 'block';
-                    setTimeout(() => currentImage.style.opacity = '1', 200); // フェードイン
+                    const nextImage = document.getElementById(images[currentImageIndex]);
+                    nextImage.style.display = 'block';
+                    setTimeout(() => {
+                        nextImage.style.opacity = '1';
+                    }, 100); // 100ミリ秒の遅延でフェードイン開始
                     currentImageIndex++;
                 }
 
@@ -194,7 +192,9 @@
                         flyText.style.animation = 'floatUp 3s ease-out forwards'; // 文字が浮き上がって消える
                     }, 4000); // 4秒後にテキストを浮き上がらせるアニメーション開始
 
-                    setTimeout(() => retryBtn.style.display = 'block', 6000); // 文字が消えて2秒後にボタン表示
+                    setTimeout(() => {
+                        retryBtn.style.display = 'block'; // テキストが消えた2秒後にやり直しボタンを表示
+                    }, 6000); // 文字が消えた2秒後にリトライボタンを表示
                 }
             }, 2000); // 2秒ごとに画像を切り替える
         }
@@ -208,9 +208,7 @@
 
             // 画像をすべて非表示にし、フォームとタイトルを再表示
             images.forEach(imageId => {
-                const img = document.getElementById(imageId);
-                img.style.display = 'none';
-                img.style.opacity = '0'; // フェードアウト状態にリセット
+                document.getElementById(imageId).style.display = 'none';
             });
 
             flyText.textContent = '';
