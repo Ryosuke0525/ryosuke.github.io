@@ -84,13 +84,8 @@
             const textarea = document.getElementById('thoughts');
             const flyText = document.getElementById('fly-text');
             const message = document.getElementById('successMessage');
-            
-            // アニメーション後にテキストを飛ばし、フォームを非表示にする
-            setTimeout(() => {
-                document.getElementById('form-container').style.display = 'none';
-                flyText.style.display = 'none';
-                message.style.display = 'block';
-            }, 3000);  // アニメーションが終わる3秒後に処理を実行
+
+            formContainer.style.display = 'none';
             
             // テキストエリアの内容を取得して、flyTextに表示
             const userThoughts = textarea.value;
