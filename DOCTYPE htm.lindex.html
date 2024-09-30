@@ -7,7 +7,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('https://ryosuke0525.github.io/ryosuke.github.io/%E7%94%BB%E5%83%8F1.png') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
             text-align: center;
@@ -24,19 +23,19 @@
             margin-top: 20px;
         }
         textarea {
-            width: 80%;
-            max-width: 600px;
-            height: 150px;
-            font-size: 16px;
-            padding: 10px;
+            width: 90%;
+            max-width: 800px;
+            height: 250px; /* サイズを大きくしました */
+            font-size: 18px;
+            padding: 15px;
             background-color: rgba(0, 0, 0, 0.5);
             color: #fff;
             border: 1px solid #fff;
             resize: none;
         }
         button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 12px 24px;
+            font-size: 18px;
             margin-top: 10px;
             cursor: pointer;
             background-color: rgba(255, 255, 255, 0.3);
@@ -52,9 +51,10 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            font-size: 20px;
+            font-size: 24px;
             white-space: pre-wrap;
             text-align: center;
+            z-index: 10; /* 文字が常に前面に表示されるようにしました */
         }
         .message {
             display: none;
@@ -81,6 +81,20 @@
                 opacity: 0;
             }
         }
+        #retry-btn {
+            display: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: 1px solid #fff;
+            color: #fff;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        #retry-btn:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -103,19 +117,15 @@
     <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001740.png" class="image-sequence" id="image4" alt="Sequence Image 4">
     <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-09-21%20095840.png" class="image-sequence" id="image5" alt="Sequence Image 5">
 
+    <button id="retry-btn" onclick="retry()">もう一度やり直す</button>
+
     <script>
         function sendThought() {
             const textarea = document.getElementById('thoughts');
             const flyText = document.getElementById('fly-text');
             const formContainer = document.getElementById('form-container');
             const message = document.getElementById('successMessage');
-
-            // テキストエリアが空の場合のエラーハンドリング
-            const userThoughts = textarea.value.trim();
-            if (!userThoughts) {
-                alert("想いを書いてから送信してください！");
-                return;
-            }
+            const retryBtn = document.getElementById('retry-btn');
 
             // テキストエリアの内容を取得して中央に表示
             flyText.textContent = userThoughts;
@@ -140,19 +150,30 @@
                     currentImageIndex++;
                 }
 
-                // 5枚目の画像が表示されたら、3秒間フェードアウト
+                // 5枚目の画像が表示されたら、3秒間フェードアウトせず文字を消す
                 if (currentImageIndex === images.length) {
                     clearInterval(imageInterval);
-                    const lastImage = document.getElementById('image5');
-                    lastImage.classList.add('fade-out');
-                    
-                    // 3秒後にメッセージを表示
-                    setTimeout(() => {
-                        lastImage.style.display = 'none';
-                        message.style.display = 'block';
-                    }, 3000);
+                    flyText.style.display = 'none';  // 文字を非表示にする
+                    retryBtn.style.display = 'block'; // やり直しボタンを表示
                 }
             }, 1000); // 1秒ごとに画像を切り替える
+        }
+
+        function retry() {
+            const formContainer = document.getElementById('form-container');
+            const flyText = document.getElementById('fly-text');
+            const retryBtn = document.getElementById('retry-btn');
+            const images = ['image1', 'image2', 'image3', 'image4', 'image5'];
+
+            // 画像をすべて非表示にし、フォームを再表示
+            images.forEach(imageId => {
+                document.getElementById(imageId).style.display = 'none';
+            });
+
+            flyText.textContent = '';
+            flyText.style.display = 'block';
+            formContainer.style.display = 'block';
+            retryBtn.style.display = 'none'; // やり直しボタンを非表示にする
         }
     </script>
 
