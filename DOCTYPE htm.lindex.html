@@ -36,9 +36,9 @@
             z-index: 20; /* 背景画像よりも前面に表示 */
         }
         textarea {
-            width: 300%; /* 横長にさらに調整 */
-            max-width: 1400px; /* 横幅の最大サイズを指定 */
-            height: 200px;
+            width: 180%; /* 横幅を3倍に調整 */
+            max-width: 2200px; /* 横幅の最大サイズを指定 */
+            height: 200px; /* 高さを200pxに戻しました */
             font-size: 18px;
             padding: 15px;
             background-color: rgba(0, 0, 0, 0.5);
@@ -198,6 +198,7 @@
             const retryBtn = document.getElementById('retry-btn');
             const mainTitle = document.getElementById('main-title');
             const images = ['image1', 'image2', 'image3', 'image4', 'image5'];
+            const textarea = document.getElementById('thoughts');
 
             // 画像をすべて非表示にし、初期画面を再表示
             images.forEach(imageId => {
@@ -212,6 +213,9 @@
             formContainer.style.display = 'block';
             mainTitle.style.display = 'block';
             retryBtn.style.display = 'none'; // やり直しボタンを非表示にする
+
+            // テキストボックスの内容をクリア
+            textarea.value = '';
         }
     </script>
 
