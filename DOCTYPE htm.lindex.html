@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url(https://i.ytimg.com/vi/fAcIsobtvz0/maxresdefault.jpg) no-repeat center center fixed;
+            background: url('https://example.com/space-background.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
             text-align: center;
@@ -44,7 +44,6 @@
             transform: translate(-50%, -50%);
             font-size: 20px;
             white-space: pre-wrap;
-            display: none;
             text-align: center;
         }
         .message {
@@ -52,25 +51,25 @@
             margin-top: 20px;
             font-size: 18px;
         }
-        .animate-text {
-            animation: flyUp 3s ease-out forwards;
+        .image-sequence {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            width: 300px; /* 画像のサイズは適宜調整 */
+            height: auto;
         }
-        @keyframes flyUp {
+        .fade-out {
+            animation: fadeOut 3s ease-out forwards;
+        }
+        @keyframes fadeOut {
             0% {
                 opacity: 1;
-                transform: translateY(0);
             }
             100% {
                 opacity: 0;
-                transform: translateY(-400px);
             }
-        }
-        #retry-btn {
-            display: none;
-            margin-top: 20px;
-            font-size: 18px;
-            padding: 10px 20px;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -86,7 +85,13 @@
     <div id="fly-text"></div>
 
     <div class="message" id="successMessage">あなたの想いは宇宙へ飛び立ちました！</div>
-    <button id="retry-btn" onclick="retry()">もう一度やり直す</button>
+
+    <!-- 画像を5枚用意 -->
+    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001642.png" class="image-sequence" id="image1">
+    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001700.png" class="image-sequence" id="image2">
+    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001717.png" class="image-sequence" id="image3">
+    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-10-01%20001740.png" class="image-sequence" id="image4">
+    <img src="https://ryosuke0525.github.io/ryosuke.github.io/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-09-21%20095840.png" class="image-sequence" id="image5">
 
     <script>
         function sendThought() {
@@ -94,32 +99,44 @@
             const flyText = document.getElementById('fly-text');
             const formContainer = document.getElementById('form-container');
             const message = document.getElementById('successMessage');
-            const retryBtn = document.getElementById('retry-btn');
             
-            // テキストエリアの内容を取得して、flyTextに表示
+            // テキストエリアの内容を取得して中央に表示
             const userThoughts = textarea.value;
             flyText.textContent = userThoughts;
-            flyText.style.display = 'block';
-            flyText.classList.add('animate-text');
 
             // ボタンを押した瞬間にフォームを非表示にする
             formContainer.style.display = 'none';
 
-            // アニメーション後にメッセージと「もう一度」ボタンを表示
-            setTimeout(() => {
-                flyText.style.display = 'none';
-                message.style.display = 'block';
-                retryBtn.style.display = 'block';
-            }, 3000);  // アニメーションが終わる3秒後に処理を実行
-        }
+            // 画像のリスト
+            const images = ['image1', 'image2', 'image3', 'image4', 'image5'];
+            let currentImageIndex = 0;
 
-        function retry() {
-            // フォームとテキストエリアを初期化
-            document.getElementById('form-container').style.display = 'block';
-            document.getElementById('thoughts').value = '';
-            document.getElementById('fly-text').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'none';
-            document.getElementById('retry-btn').style.display = 'none';
+            // 1秒ごとに画像を切り替え
+            const imageInterval = setInterval(() => {
+                // すべての画像を一度非表示にする
+                images.forEach(imageId => {
+                    document.getElementById(imageId).style.display = 'none';
+                });
+                
+                // 次の画像を表示
+                if (currentImageIndex < images.length) {
+                    document.getElementById(images[currentImageIndex]).style.display = 'block';
+                    currentImageIndex++;
+                }
+
+                // 5枚目の画像が表示されたら、3秒間フェードアウト
+                if (currentImageIndex === images.length) {
+                    clearInterval(imageInterval);
+                    const lastImage = document.getElementById('image5');
+                    lastImage.classList.add('fade-out');
+                    
+                    // 3秒後にメッセージを表示
+                    setTimeout(() => {
+                        lastImage.style.display = 'none';
+                        message.style.display = 'block';
+                    }, 3000);
+                }
+            }, 1000); // 1秒ごとに画像を切り替える
         }
     </script>
 
