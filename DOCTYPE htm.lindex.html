@@ -33,10 +33,14 @@
         #form-container {
             margin-top: 20px;
             position: relative;
-            z-index: 20; /* 背景画像よりも前面に表示 */
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* フォームを中央に配置 */
         }
         textarea {
-            width: 180%; /* 横幅を3倍に調整 */
+            width: 300%; /* 横幅を3倍に調整 */
             max-width: 2200px; /* 横幅の最大サイズを指定 */
             height: 200px; /* 高さを200pxに戻しました */
             font-size: 18px;
