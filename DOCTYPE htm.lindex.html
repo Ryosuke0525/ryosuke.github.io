@@ -45,6 +45,7 @@
             font-size: 20px;
             white-space: pre-wrap;
             display: none;
+            text-align: center;
         }
         .message {
             display: none;
@@ -64,6 +65,13 @@
                 transform: translateY(-400px);
             }
         }
+        #retry-btn {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -78,6 +86,7 @@
     <div id="fly-text"></div>
 
     <div class="message" id="successMessage">あなたの想いは宇宙へ飛び立ちました！</div>
+    <button id="retry-btn" onclick="retry()">もう一度やり直す</button>
 
     <script>
         function sendThought() {
@@ -85,6 +94,7 @@
             const flyText = document.getElementById('fly-text');
             const formContainer = document.getElementById('form-container');
             const message = document.getElementById('successMessage');
+            const retryBtn = document.getElementById('retry-btn');
             
             // テキストエリアの内容を取得して、flyTextに表示
             const userThoughts = textarea.value;
@@ -95,11 +105,21 @@
             // ボタンを押した瞬間にフォームを非表示にする
             formContainer.style.display = 'none';
 
-            // アニメーション後にメッセージを表示する
+            // アニメーション後にメッセージと「もう一度」ボタンを表示
             setTimeout(() => {
                 flyText.style.display = 'none';
                 message.style.display = 'block';
+                retryBtn.style.display = 'block';
             }, 3000);  // アニメーションが終わる3秒後に処理を実行
+        }
+
+        function retry() {
+            // フォームとテキストエリアを初期化
+            document.getElementById('form-container').style.display = 'block';
+            document.getElementById('thoughts').value = '';
+            document.getElementById('fly-text').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('retry-btn').style.display = 'none';
         }
     </script>
 
