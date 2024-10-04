@@ -229,9 +229,6 @@
             const necLogo = document.getElementById('nec-logo-container')
             const spacesLogo = document.getElementById('spaces-logo-container')
 
-            //ロゴを消す
-            necLogo.style.display: 'none';
-            spacesLogo.style.display: 'none';
 
             // 初期背景を消し、1枚目から切り替えを開始する
             document.body.style.backgroundImage = 'none';
@@ -248,6 +245,10 @@
             // ボタンを押した瞬間にフォームとタイトルを非表示にする
             formContainer.style.display = 'none';
             mainTitle.style.display = 'none';
+            
+            //ロゴを消す
+            necLogo.style.display: 'none';
+            spacesLogo.style.display: 'none';
 
             let currentImageIndex = 0;
 
