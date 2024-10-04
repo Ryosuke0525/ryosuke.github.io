@@ -229,9 +229,13 @@
             const necLogo = document.querySelector('#nec-logo-container img');
             const spacesLogo = document.querySelector('#spaces-logo-container img');
             
-            //ロゴを消す
-            necLogo.style.display: 'none';
-            spacesLogo.style.display: 'none';
+            // ロゴを消す
+            if (necLogo) {
+                necLogo.style.display = 'none';
+            }
+            if (spacesLogo) {
+                spacesLogo.style.display = 'none';
+            }
             
             // 初期背景を消し、1枚目から切り替えを開始する
             document.body.style.backgroundImage = 'none';
