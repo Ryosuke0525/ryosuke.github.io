@@ -47,31 +47,27 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         /* 上部セクションの背景画像 */
         #top-section {
             background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/%E9%AB%98%E5%BA%A628km%2015.png'); /* 上部背景画像 */
-            background-size: cover;
-            background-position: center;
         }
 
         /* 中間セクションの背景画像 */
         #middle-section {
             background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/石廊崎オーシャンパーク.jpg'); /* 中間背景画像 */
-            background-size: cover;
-            background-position: center;
             flex-direction: column;
             background-color: rgba(0, 0, 0, 0.3); /* 背景の透明度を調整 */
             padding: 20px;
         }
 
-        /* 下部セクションの背景画像 */
+        /* 下部セクションの背景画像を上部と中部と同様に設定 */
         #bottom-section {
             background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/%E5%9C%B0%E4%B8%8A.png'); /* 下部背景画像 */
-            background-size: contain; /* 画像の大きさを調整 */
-            background-repeat: no-repeat;
-            background-position: center;
         }
 
         h1 {
@@ -103,6 +99,8 @@
         #nec-logo-container img, #spaces-logo-container img {
             width: 80px; /* モバイル向けに縮小 */
             height: auto;
+            max-height: 80px; /* 縦方向のサイズを固定 */
+            object-fit: contain;
         }
 
         #form-container {
@@ -219,6 +217,7 @@
             /* デスクトップ向けスタイル */
             #nec-logo-container img, #spaces-logo-container img {
                 width: 150px;
+                max-height: 150px; /* 縦方向のサイズを固定 */
             }
 
             h1 {
@@ -432,16 +431,10 @@
                 // 一度だけ実行されるようにイベントリスナーを削除
                 backgroundVideo.removeEventListener('ended', handler);
 
-                // 動画終了後に静止画を表示
-                document.body.style.backgroundImage = "url('https://ryosuke0525.github.io/ryosuke.github.io/%E9%AB%98%E5%BA%A628km%205.png')"; // スペースを%20にエンコード
-                backgroundVideo.style.display = 'none';
-
-                // 2秒後にテキストを浮き上がらせるアニメーション開始
-                setTimeout(() => {
-                    flyText.style.animation = 'floatUp 3s ease-out forwards'; // 文字が浮き上がって消える
-                }, 2000); // 2秒後にアニメーション開始
-
-                // アニメーション完了後にメッセージとリトライボタンを表示
+                // 動画終了後に最後のフレームを保持するため、静止画の表示を廃止
+                // 動画を停止し、最後のフレームを保持
+                backgroundVideo.pause();
+                // オプション: メッセージとリトライボタンを表示
                 setTimeout(() => {
                     successMessage.style.display = 'block';
                     retryBtn.style.display = 'block';
