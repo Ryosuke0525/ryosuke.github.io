@@ -18,9 +18,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/01@2x.jpg'); /* 初期画面の背景画像 */
-            background-size: cover;
-            background-position: center;
+            background-color: #000; /* 初期背景カラーを設定 */
         }
 
         /* 背景動画のスタイル（初期は非表示） */
@@ -31,7 +29,7 @@
             width: 100vw;
             height: 100vh;
             object-fit: cover;
-            z-index: -1;
+            z-index: -2;
             display: none; /* 初期は非表示 */
         }
 
@@ -51,15 +49,23 @@
             position: relative;
         }
 
-        #top-section img, #bottom-section img {
-            width: 80%;
-            height: auto;
-            max-height: 100%;
-            object-fit: contain;
+        /* 上部セクションの背景画像 */
+        #top-section {
+            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/高度28km 15.png'); /* 上部背景画像 */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 下部セクションの背景画像 */
+        #bottom-section {
+            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/地上.png'); /* 下部背景画像 */
+            background-size: cover;
+            background-position: center;
         }
 
         #middle-section {
             flex-direction: column;
+            background-color: rgba(0, 0, 0, 0.3); /* 背景の透明度を調整 */
         }
 
         h1 {
@@ -69,7 +75,6 @@
             padding: 10px 20px;
             border-radius: 10px;
             color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 文字の視認性向上 */
             font-size: 6vw; /* モバイル向けに調整 */
             max-width: 90%;
         }
@@ -82,11 +87,11 @@
         }
 
         #nec-logo-container {
-            right: 20px;
+            left: 20px; /* 右から左に変更 */
         }
 
         #spaces-logo-container {
-            right: 120px; /* スマートフォン向けに調整 */
+            left: 120px; /* 右から左に変更 */
         }
 
         #nec-logo-container img, #spaces-logo-container img {
@@ -153,7 +158,6 @@
             border-radius: 5px;
             padding: 10px;
             color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
         .message {
@@ -163,7 +167,6 @@
             background-color: rgba(0, 0, 0, 0.5); /* 背景色を追加 */
             padding: 10px 20px;
             border-radius: 5px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
         #retry-btn {
@@ -228,7 +231,7 @@
         @media screen and (max-width: 600px) {
             /* スマートフォン向けスタイル */
             #spaces-logo-container {
-                right: 100px; /* ロゴ間のスペースを調整 */
+                left: 100px; /* ロゴ間のスペースを調整 */
             }
 
             h1 {
@@ -276,14 +279,14 @@
 
     <!-- 背景動画（初期は非表示） -->
     <video id="background-video" autoplay muted>
-        <source src="https://ryosuke0525.github.io/ryosuke.github.io/space-video.mov" type="video/mp4">
+        <source src="https://ryosuke0525.github.io/ryosuke.github.io/space-video.mp4" type="video/mp4">
         <!-- 必要に応じて他のフォーマットを追加 -->
         お使いのブラウザは動画タグに対応していません。
     </video>
 
     <div id="container">
         <div id="top-section">
-            <img src="https://ryosuke0525.github.io/ryosuke.github.io/top-image.jpg" alt="Top Image">
+            <!-- 背景画像がCSSで設定されているため、画像タグは不要 -->
         </div>
         <div id="middle-section">
             <h1 id="main-title">あなたの想いを宇宙へ飛ばそう！</h1>
@@ -293,7 +296,7 @@
             </div>
         </div>
         <div id="bottom-section">
-            <img src="https://ryosuke0525.github.io/ryosuke.github.io/bottom-image.jpg" alt="Bottom Image">
+            <!-- 背景画像がCSSで設定されているため、画像タグは不要 -->
         </div>
     </div>
 
@@ -301,14 +304,14 @@
 
     <div class="message" id="successMessage">あなたの想いは宇宙へ飛び立ちました！</div>
 
-    <!-- NECのロゴを右下に配置 -->
+    <!-- NECのロゴを左下に配置 -->
     <div id="nec-logo-container">
         <a href="https://jpn.nec.com/index.html" target="_blank">
             <img src="https://spaces0701.github.io/SpaceS.github.io/NEC%20BluStellar.png" alt="NEC logo">
         </a>
     </div>
 
-    <!-- Space Sのロゴを右下に配置 -->
+    <!-- Space Sのロゴを左下に配置 -->
     <div id="spaces-logo-container">
         <a href="https://sites.google.com/view/space-s-jp/?authuser=0" target="_blank">
             <img src="https://spaces0701.github.io/SpaceS.github.io/Space%20S文字%20切り抜き.png" alt="Space S logo">
@@ -369,8 +372,11 @@
             mainTitle.style.display = 'none';
 
             // 背景動画の再生が終了したときの処理
-            backgroundVideo.addEventListener('ended', function() {
-                // 動画終了後に静止画を表示（例として背景に別の画像を設定）
+            backgroundVideo.addEventListener('ended', function handler() {
+                // 一度だけ実行されるようにイベントリスナーを削除
+                backgroundVideo.removeEventListener('ended', handler);
+
+                // 動画終了後に静止画を表示
                 document.body.style.backgroundImage = "url('https://ryosuke0525.github.io/ryosuke.github.io/高度28km 5.png')";
                 backgroundVideo.style.display = 'none';
 
@@ -416,7 +422,7 @@
                 backgroundVideo.pause();
                 backgroundVideo.currentTime = 0;
             }
-            document.body.style.backgroundImage = "url('https://ryosuke0525.github.io/ryosuke.github.io/01@2x.jpg')";
+            document.body.style.backgroundImage = "none"; // 初期背景画像を非表示
 
             // flyTextのリセット
             flyText.textContent = '';
