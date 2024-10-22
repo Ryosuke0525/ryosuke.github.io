@@ -165,7 +165,8 @@
             z-index: 20;
             width: 80%;
             display: none; /* 初期は非表示 */
-            background-color: rgba(0, 0, 0, 0.5); /* 背景色を追加して視認性を向上 */
+            /* 背景色を削除してテキストのみ表示 */
+            /* background-color: rgba(0, 0, 0, 0.5); */
             border-radius: 5px;
             padding: 10px;
             color: #fff;
@@ -311,7 +312,7 @@
         <div id="middle-section">
             <h1 id="main-title">あなたの想いを宇宙へ飛ばそう！</h1>
             <!-- 中間セクションに画像を追加 -->
-            <img id="middle-image" src="https://ryosuke0525.github.io/ryosuke.github.io/middle-image.jpg" alt="Middle Image">
+            <img id="middle-image" src="https://ryosuke0525.github.io/ryosuke.github.io/石廊崎オーシャンパーク.jpg" alt="Middle Image">
             <div id="form-container">
                 <textarea id="thoughts" placeholder="誰にも言えないような、そんなあなたの想いを書いてください。"></textarea><br>
                 <button onclick="sendThought()">想いを飛ばす</button>
@@ -353,6 +354,9 @@
             const spacesLogo = document.querySelector('#spaces-logo-container img');
             const backgroundVideo = document.getElementById('background-video');
             const successMessage = document.getElementById('successMessage');
+            const middleImage = document.getElementById('middle-image');
+            const topSection = document.getElementById('top-section');
+            const bottomSection = document.getElementById('bottom-section');
 
             // テキストエリアの内容を取得
             const thoughtText = textarea.value.trim();
@@ -372,9 +376,16 @@
                 spacesLogo.style.display = 'none';
             }
 
-            // 初期背景画像を非表示
-            // 各セクションの背景画像を非表示にする必要はありません。
-            // 代わりに、動画が背景として表示されるようにします。
+            // 上部と下部のセクションを非表示
+            if (topSection) {
+                topSection.style.display = 'none';
+            }
+            if (bottomSection) {
+                bottomSection.style.display = 'none';
+            }
+
+            // 初期背景画像を非表示（bodyの背景画像を削除）
+            document.body.style.backgroundImage = 'none';
 
             // 背景動画を表示して再生（ループしないように設定）
             if (backgroundVideo) {
@@ -393,7 +404,7 @@
             // ボタンを押した瞬間にフォームとタイトルを非表示にする
             formContainer.style.display = 'none';
             mainTitle.style.display = 'none';
-            document.getElementById('middle-image').style.display = 'none'; // 中間画像を非表示
+            middleImage.style.display = 'none'; // 中間画像を非表示
 
             // 背景動画の再生が終了したときの処理
             backgroundVideo.addEventListener('ended', function handler() {
@@ -401,7 +412,7 @@
                 backgroundVideo.removeEventListener('ended', handler);
 
                 // 動画終了後に静止画を表示
-                document.body.style.backgroundImage = "url('https://ryosuke0525.github.io/ryosuke.github.io/高度28km%205.png')"; // スペースを%20にエンコード
+                document.body.style.backgroundImage = "url('https://ryosuke0525.github.io/ryosuke.github.io/%E9%AB%98%E5%BA%A628km%205.png')"; // スペースを%20にエンコード
                 backgroundVideo.style.display = 'none';
 
                 // 2秒後にテキストを浮き上がらせるアニメーション開始
@@ -440,6 +451,8 @@
             const successMessage = document.getElementById('successMessage');
             const backgroundVideo = document.getElementById('background-video');
             const middleImage = document.getElementById('middle-image');
+            const topSection = document.getElementById('top-section');
+            const bottomSection = document.getElementById('bottom-section');
 
             // 背景動画を非表示し、初期背景画像を再表示
             if (backgroundVideo) {
@@ -465,6 +478,14 @@
 
             // 中間画像を再表示
             middleImage.style.display = 'block';
+
+            // 上部と下部のセクションを再表示
+            if (topSection) {
+                topSection.style.display = 'flex';
+            }
+            if (bottomSection) {
+                bottomSection.style.display = 'flex';
+            }
 
             // リトライボタンとメッセージを非表示
             retryBtn.style.display = 'none';
