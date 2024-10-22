@@ -171,9 +171,14 @@
             display: none;
             margin-top: 20px;
             font-size: 5vw;
-            background-color: rgba(0, 0, 0, 0.5); /* 背景色を追加 */
-            padding: 10px 20px;
-            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.7); /* 背景色を強化 */
+            padding: 20px 30px;
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 25; /* メインタイトルより前面 */
         }
 
         #retry-btn {
@@ -187,7 +192,10 @@
             border-radius: 5px;
             transition: background-color 0.3s ease;
             margin-top: 20px;
-            position: relative;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 30;
         }
 
@@ -268,6 +276,15 @@
                 height: auto;
                 max-height: 70vh; /* 最大高さを設定 */
             }
+
+            /* メッセージとリトライボタンの位置調整 */
+            .message {
+                padding: 15px 25px;
+            }
+
+            #retry-btn {
+                top: 65%;
+            }
         }
 
         @media screen and (max-height: 700px) {
@@ -285,6 +302,10 @@
 
             .message {
                 font-size: 4vw;
+            }
+
+            #retry-btn {
+                top: 70%;
             }
         }
     </style>
@@ -382,11 +403,17 @@
             // 初期背景画像を非表示（bodyの背景画像を削除）
             document.body.style.backgroundImage = 'none';
 
+            // モバイルデバイスの判定
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
             // 背景動画を表示して再生（ループしないように設定）
             if (backgroundVideo) {
                 backgroundVideo.style.display = 'block';
                 backgroundVideo.loop = false; // ループ再生を無効化
-                backgroundVideo.play();
+                if (!isMobile) {
+                    backgroundVideo.play();
+                }
+                // モバイルでは自動再生を避ける
             }
 
             // テキストエリアの内容を中央に表示
