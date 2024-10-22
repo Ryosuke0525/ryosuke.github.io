@@ -51,7 +51,7 @@
 
         /* 上部セクションの背景画像 */
         #top-section {
-            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/高度28km%2015.png'); /* 上部背景画像 */
+            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/%E9%AB%98%E5%BA%A628km%2015.png'); /* 上部背景画像 */
             background-size: cover;
             background-position: center;
         }
@@ -68,7 +68,7 @@
 
         /* 下部セクションの背景画像 */
         #bottom-section {
-            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/地上.png'); /* 下部背景画像 */
+            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/%E5%9C%B0%E4%B8%8A.png'); /* 下部背景画像 */
             background-size: cover;
             background-position: center;
         }
@@ -296,8 +296,7 @@
         </div>
         <div id="middle-section">
             <h1 id="main-title">あなたの想いを宇宙へ飛ばそう！</h1>
-            <!-- 中間セクションに画像を追加 -->
-            <!-- 必要に応じて中間セクションの背景画像を使用するため、ここでは画像タグは不要です -->
+            <!-- 中間セクションのフォーム -->
             <div id="form-container">
                 <textarea id="thoughts" placeholder="誰にも言えないような、そんなあなたの想いを書いてください。"></textarea><br>
                 <button onclick="sendThought()">想いを飛ばす</button>
@@ -340,6 +339,7 @@
             const backgroundVideo = document.getElementById('background-video');
             const successMessage = document.getElementById('successMessage');
             const topSection = document.getElementById('top-section');
+            const middleSection = document.getElementById('middle-section');
             const bottomSection = document.getElementById('bottom-section');
 
             // テキストエリアの内容を取得
@@ -360,9 +360,12 @@
                 spacesLogo.style.display = 'none';
             }
 
-            // 上部と下部のセクションを非表示
+            // 上部、中部、下部のセクションを非表示
             if (topSection) {
                 topSection.style.display = 'none';
+            }
+            if (middleSection) {
+                middleSection.style.display = 'none';
             }
             if (bottomSection) {
                 bottomSection.style.display = 'none';
@@ -434,6 +437,7 @@
             const successMessage = document.getElementById('successMessage');
             const backgroundVideo = document.getElementById('background-video');
             const topSection = document.getElementById('top-section');
+            const middleSection = document.getElementById('middle-section');
             const bottomSection = document.getElementById('bottom-section');
 
             // 背景動画を非表示し、初期背景画像を再表示
@@ -458,9 +462,12 @@
             // タイトルを再表示
             mainTitle.style.display = 'block';
 
-            // 上部と下部のセクションを再表示
+            // 上部、中部、下部のセクションを再表示
             if (topSection) {
                 topSection.style.display = 'flex';
+            }
+            if (middleSection) {
+                middleSection.style.display = 'flex';
             }
             if (bottomSection) {
                 bottomSection.style.display = 'flex';
