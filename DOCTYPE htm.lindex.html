@@ -51,22 +51,26 @@
 
         /* 上部セクションの背景画像 */
         #top-section {
-            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/%E9%AB%98%E5%BA%A628km%2015.png'); /* 上部背景画像（スペースを%20にエンコード） */
+            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/高度28km%2015.png'); /* 上部背景画像 */
             background-size: cover;
             background-position: center;
+        }
+
+        /* 中間セクションの背景画像 */
+        #middle-section {
+            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/石廊崎オーシャンパーク.jpg'); /* 中間背景画像 */
+            background-size: cover;
+            background-position: center;
+            flex-direction: column;
+            background-color: rgba(0, 0, 0, 0.3); /* 背景の透明度を調整 */
+            padding: 20px;
         }
 
         /* 下部セクションの背景画像 */
         #bottom-section {
-            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/%E5%9C%B0%E4%B8%8A.png'); /* 下部背景画像 */
+            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/地上.png'); /* 下部背景画像 */
             background-size: cover;
             background-position: center;
-        }
-
-        #middle-section {
-            flex-direction: column;
-            background-color: rgba(0, 0, 0, 0.3); /* 背景の透明度を調整 */
-            padding: 20px;
         }
 
         h1 {
@@ -109,16 +113,6 @@
             justify-content: center;
             align-items: center;
             width: 90%;
-        }
-
-        /* 中間セクションの画像 */
-        #middle-image {
-            width: 80%;
-            max-width: 400px;
-            height: auto;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            object-fit: cover;
         }
 
         textarea {
@@ -222,10 +216,6 @@
                 font-size: 2vw;
             }
 
-            #middle-image {
-                max-width: 600px;
-            }
-
             textarea {
                 height: 150px;
                 font-size: 16px;
@@ -252,11 +242,6 @@
 
             h1 {
                 font-size: 6vw;
-            }
-
-            #middle-image {
-                width: 90%;
-                max-width: 300px;
             }
 
             textarea {
@@ -307,19 +292,19 @@
 
     <div id="container">
         <div id="top-section">
-            <!-- 背景画像がCSSで設定されているため、画像タグは不要 -->
+            <!-- 上部セクションの背景画像がCSSで設定されているため、画像タグは不要 -->
         </div>
         <div id="middle-section">
             <h1 id="main-title">あなたの想いを宇宙へ飛ばそう！</h1>
             <!-- 中間セクションに画像を追加 -->
-            <img id="middle-image" src="https://ryosuke0525.github.io/ryosuke.github.io/石廊崎オーシャンパーク.jpg" alt="Middle Image">
+            <!-- 必要に応じて中間セクションの背景画像を使用するため、ここでは画像タグは不要です -->
             <div id="form-container">
                 <textarea id="thoughts" placeholder="誰にも言えないような、そんなあなたの想いを書いてください。"></textarea><br>
                 <button onclick="sendThought()">想いを飛ばす</button>
             </div>
         </div>
         <div id="bottom-section">
-            <!-- 背景画像がCSSで設定されているため、画像タグは不要 -->
+            <!-- 下部セクションの背景画像がCSSで設定されているため、画像タグは不要 -->
         </div>
     </div>
 
@@ -354,7 +339,6 @@
             const spacesLogo = document.querySelector('#spaces-logo-container img');
             const backgroundVideo = document.getElementById('background-video');
             const successMessage = document.getElementById('successMessage');
-            const middleImage = document.getElementById('middle-image');
             const topSection = document.getElementById('top-section');
             const bottomSection = document.getElementById('bottom-section');
 
@@ -404,7 +388,6 @@
             // ボタンを押した瞬間にフォームとタイトルを非表示にする
             formContainer.style.display = 'none';
             mainTitle.style.display = 'none';
-            middleImage.style.display = 'none'; // 中間画像を非表示
 
             // 背景動画の再生が終了したときの処理
             backgroundVideo.addEventListener('ended', function handler() {
@@ -450,7 +433,6 @@
             const spacesLogo = document.querySelector('#spaces-logo-container img');
             const successMessage = document.getElementById('successMessage');
             const backgroundVideo = document.getElementById('background-video');
-            const middleImage = document.getElementById('middle-image');
             const topSection = document.getElementById('top-section');
             const bottomSection = document.getElementById('bottom-section');
 
@@ -475,9 +457,6 @@
 
             // タイトルを再表示
             mainTitle.style.display = 'block';
-
-            // 中間画像を再表示
-            middleImage.style.display = 'block';
 
             // 上部と下部のセクションを再表示
             if (topSection) {
