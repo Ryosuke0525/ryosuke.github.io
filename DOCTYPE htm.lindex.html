@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -52,14 +51,14 @@
 
         /* 上部セクションの背景画像 */
         #top-section {
-            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/高度28km 15.png'); /* 上部背景画像 */
+            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/%E9%AB%98%E5%BA%A628km%2015.png'); /* 上部背景画像（スペースを%20にエンコード） */
             background-size: cover;
             background-position: center;
         }
 
         /* 下部セクションの背景画像 */
         #bottom-section {
-            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/地上.png'); /* 下部背景画像 */
+            background-image: url('https://ryosuke0525.github.io/ryosuke.github.io/%E5%9C%B0%E4%B8%8A.png'); /* 下部背景画像 */
             background-size: cover;
             background-position: center;
         }
@@ -67,6 +66,7 @@
         #middle-section {
             flex-direction: column;
             background-color: rgba(0, 0, 0, 0.3); /* 背景の透明度を調整 */
+            padding: 20px;
         }
 
         h1 {
@@ -88,11 +88,11 @@
         }
 
         #nec-logo-container {
-            left: 20px; /* 右から左に変更 */
+            left: 20px; /* 左下に配置 */
         }
 
         #spaces-logo-container {
-            left: 120px; /* 右から左に変更 */
+            left: 120px; /* 左下に配置 */
         }
 
         #nec-logo-container img, #spaces-logo-container img {
@@ -109,6 +109,16 @@
             justify-content: center;
             align-items: center;
             width: 90%;
+        }
+
+        /* 中間セクションの画像 */
+        #middle-image {
+            width: 80%;
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            object-fit: cover;
         }
 
         textarea {
@@ -211,6 +221,10 @@
                 font-size: 2vw;
             }
 
+            #middle-image {
+                max-width: 600px;
+            }
+
             textarea {
                 height: 150px;
                 font-size: 16px;
@@ -237,6 +251,11 @@
 
             h1 {
                 font-size: 6vw;
+            }
+
+            #middle-image {
+                width: 90%;
+                max-width: 300px;
             }
 
             textarea {
@@ -291,6 +310,8 @@
         </div>
         <div id="middle-section">
             <h1 id="main-title">あなたの想いを宇宙へ飛ばそう！</h1>
+            <!-- 中間セクションに画像を追加 -->
+            <img id="middle-image" src="https://ryosuke0525.github.io/ryosuke.github.io/middle-image.jpg" alt="Middle Image">
             <div id="form-container">
                 <textarea id="thoughts" placeholder="誰にも言えないような、そんなあなたの想いを書いてください。"></textarea><br>
                 <button onclick="sendThought()">想いを飛ばす</button>
@@ -352,7 +373,8 @@
             }
 
             // 初期背景画像を非表示
-            document.body.style.backgroundImage = 'none';
+            // 各セクションの背景画像を非表示にする必要はありません。
+            // 代わりに、動画が背景として表示されるようにします。
 
             // 背景動画を表示して再生（ループしないように設定）
             if (backgroundVideo) {
@@ -371,6 +393,7 @@
             // ボタンを押した瞬間にフォームとタイトルを非表示にする
             formContainer.style.display = 'none';
             mainTitle.style.display = 'none';
+            document.getElementById('middle-image').style.display = 'none'; // 中間画像を非表示
 
             // 背景動画の再生が終了したときの処理
             backgroundVideo.addEventListener('ended', function handler() {
@@ -378,7 +401,7 @@
                 backgroundVideo.removeEventListener('ended', handler);
 
                 // 動画終了後に静止画を表示
-                document.body.style.backgroundImage = "url('https://ryosuke0525.github.io/ryosuke.github.io/高度28km 5.png')";
+                document.body.style.backgroundImage = "url('https://ryosuke0525.github.io/ryosuke.github.io/高度28km%205.png')"; // スペースを%20にエンコード
                 backgroundVideo.style.display = 'none';
 
                 // 2秒後にテキストを浮き上がらせるアニメーション開始
@@ -416,6 +439,7 @@
             const spacesLogo = document.querySelector('#spaces-logo-container img');
             const successMessage = document.getElementById('successMessage');
             const backgroundVideo = document.getElementById('background-video');
+            const middleImage = document.getElementById('middle-image');
 
             // 背景動画を非表示し、初期背景画像を再表示
             if (backgroundVideo) {
@@ -438,6 +462,9 @@
 
             // タイトルを再表示
             mainTitle.style.display = 'block';
+
+            // 中間画像を再表示
+            middleImage.style.display = 'block';
 
             // リトライボタンとメッセージを非表示
             retryBtn.style.display = 'none';
